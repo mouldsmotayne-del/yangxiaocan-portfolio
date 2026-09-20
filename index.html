@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#02080c" />
+    <meta name="description" content="杨晓璨的导演、分镜与AIGC影像个人作品集" />
+    <title>杨晓璨｜个人作品集</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2301080c'/%3E%3Cpath d='M15 12h34v40H15z' fill='%230c2e3d' stroke='%236ff5ff' stroke-width='3'/%3E%3Cpath d='M23 20h18v27H23z' fill='%23000000' stroke='%23ef3328' stroke-width='2'/%3E%3Ccircle cx='38' cy='34' r='2' fill='%236ff5ff'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main id="app" aria-live="polite">
+      <div class="stage" id="stage">
+        <section class="scene scene--intro is-active" id="introScene" aria-label="个人作品集封面">
+          <img class="scene-image intro-cover" id="introCover" src="./assets/cover.png" alt="杨晓璨个人作品集封面" draggable="false" />
+          <img class="glitch-layer glitch-layer--a" src="./assets/cover.png" alt="" aria-hidden="true" draggable="false" />
+          <img class="glitch-layer glitch-layer--b" src="./assets/cover.png" alt="" aria-hidden="true" draggable="false" />
+          <video
+            class="scene-video"
+            id="introVideo"
+            src="./assets/intro-transition.mp4"
+            preload="auto"
+            playsinline
+            aria-label="进入作品集的转场动画"
+          ></video>
+          <button class="enter-surface" id="enterButton" type="button" aria-label="点击进入个人作品集">
+            <span class="enter-hint">点击任意位置进入</span>
+          </button>
+          <p class="audio-unlock-hint" id="audioUnlockHint" hidden>浏览器已拦截自动播放，点击页面开启背景音乐</p>
+        </section>
+
+        <section class="scene scene--hub" id="hubScene" aria-label="作品集主导航" aria-hidden="true">
+          <img class="scene-image" src="./assets/hub.png" alt="三扇门组成的作品集主导航" draggable="false" />
+          <img class="glitch-layer glitch-layer--a" src="./assets/hub.png" alt="" aria-hidden="true" draggable="false" />
+          <img class="glitch-layer glitch-layer--b" src="./assets/hub.png" alt="" aria-hidden="true" draggable="false" />
+
+          <img class="door-layer door-layer--right" id="doorRightLayer" src="./assets/door-right.png" alt="" aria-hidden="true" draggable="false" />
+          <img class="door-layer door-layer--center" id="doorCenterLayer" src="./assets/door-center.png" alt="" aria-hidden="true" draggable="false" />
+          <img class="door-layer door-layer--left" id="doorLeftLayer" src="./assets/door-left.png" alt="" aria-hidden="true" draggable="false" />
+
+          <button class="door-hotspot door-hotspot--right" data-door="right" type="button" aria-label="进入代表作品"></button>
+          <button class="door-hotspot door-hotspot--center" data-door="center" type="button" aria-label="查看关于导演"></button>
+          <button class="door-hotspot door-hotspot--left" data-door="left" type="button" aria-label="查看全流程能力"></button>
+          <button class="back-button" id="hubBack" type="button">返回上一页</button>
+        </section>
+
+        <section class="scene scene--about" id="aboutScene" aria-label="关于导演" aria-hidden="true">
+          <img class="about-background" src="./assets/about-background.webp" alt="" aria-hidden="true" draggable="false" />
+          <div class="about-background-shade" aria-hidden="true"></div>
+
+          <header class="about-header">
+            <button class="about-back" id="aboutBack" type="button" aria-label="返回三扇门导航"><span aria-hidden="true">←</span></button>
+            <div>
+              <p>DIRECTOR · STORYBOARD · VISUAL NARRATIVE</p>
+              <h1>关于导演</h1>
+            </div>
+            <p class="about-header-note">以导演判断统筹剧本、分镜、表演、声音与最终交付</p>
+          </header>
+
+          <div class="about-scroll" id="aboutScroll">
+            <div class="about-content">
+              <section class="about-hero" aria-labelledby="aboutProfileTitle">
+                <div class="about-hero-copy">
+                  <p class="about-kicker">DIRECTOR PROFILE</p>
+                  <h2 id="aboutProfileTitle">全流程导演能力</h2>
+                  <p class="about-role">中央美术学院动画专业 · 2027届</p>
+                  <p class="about-statement about-bio">就读于中央美术学院动画专业，具备扎实的美术基础、审美判断与导演思维，能够从剧本出发完成剧情拆解、文字及画面分镜、镜头调度、角色表演设计、AI画面与视频生成、音乐音效及后期剪辑，具有独立完成视频全流程制作与交付的经验。尤其擅长AI视频的角色表演塑造和音乐情绪把控，重视用工具实现创意，而非停留在软件操作层面。能够与策划、编剧和主美准确沟通创作需求，根据反馈快速调整人物表现、镜头衔接与整体风格，兼顾创意表达和项目落地效率。喜欢的导演和作者有：今敏、宫崎骏、周星驰、詹姆斯·卡梅隆、丹尼·博伊尔、藤本树、荒木飞吕彦、MTJJ和谏山创，关注其在心理空间、情绪表达、喜剧节奏、镜头与音乐方面的创作方法。长期体验动作、RPG、策略、休闲经营及非对称竞技游戏：《塞尔达传说：旷野之息》《王国之泪》500小时以上（旷野之息探索度75%、王国之泪探索度85%）；《王者荣耀》6年以上（荣耀印记1、王者印记4）；《空洞骑士》150小时以上、地图探索98%；《朋友集结！梦想生活》150小时以上、岛主240级、拥有50名岛民；《代号鸢／如鸢》约1年、爵位80级；《第五人格》3年、求生五阶、监管四阶。丰富的影视观看和游戏体验使我能够从玩家视角分析不同品类的叙事节奏、角色塑造、地图引导与情绪反馈，并将这些理解转化为更符合游戏语境的分镜、角色PV与剧情CG表达。</p>
+                  <div class="about-tags" aria-label="专业方向">
+                    <span>导演与分镜</span><span>游戏CG</span><span>AIGC影像</span><span>视听语言</span>
+                  </div>
+                  <dl class="about-contact" aria-label="个人联系方式">
+                    <div><dt>姓名</dt><dd>杨晓璨</dd></div>
+                    <div><dt>邮箱</dt><dd><a href="mailto:13081066928@163.com">13081066928@163.com</a></dd></div>
+                    <div><dt>微信</dt><dd>kilakilala123</dd></div>
+                    <div><dt>电话</dt><dd><a href="tel:13081066928">13081066928</a></dd></div>
+                  </dl>
+                </div>
+                <figure class="about-portrait">
+                  <img src="./assets/about-portrait.webp" alt="杨晓璨黑白肖像" draggable="false" />
+                  <figcaption><strong>导演 / 分镜 / 视觉叙事</strong><span>中央美术学院动画专业</span></figcaption>
+                </figure>
+              </section>
+
+              <section class="about-section" aria-labelledby="projectProofTitle">
+                <div class="about-section-heading">
+                  <p>PROJECT PROOF</p>
+                  <h2 id="projectProofTitle">项目证明</h2>
+                </div>
+                <div class="about-project-grid">
+                  <article>
+                    <p class="about-project-meta">点点互动 · 2026.08至今</p>
+                    <h3>Just Desserts: Revenge &amp; Merge</h3>
+                    <p>独立完成30段游戏剧情内容，包括4段活动CG与24段剧情CG，总时长约20分钟。负责台词脚本拆解、文字与画面分镜、镜头生成和剪辑交付，画面反馈最多两轮局部修改。</p>
+                    <div><span>商业CG</span><span>分镜统筹</span><span>独立交付</span></div>
+                  </article>
+                  <article>
+                    <p class="about-project-meta">数影豹驱 · 2026.02至2026.06</p>
+                    <h3>AI短剧制作与视听教学</h3>
+                    <p>参与6部AI短剧，独立完成8集、总时长约32分钟；负责分镜、角色场景设计、动态素材与后期整合。《阴沟狂想曲》7分09秒内容上线DramaWave，并完成2节分镜与AI动画课程。</p>
+                    <div><span>短剧导演</span><span>视听教学</span><span>完整流程</span></div>
+                  </article>
+                  <article>
+                    <p class="about-project-meta">原创项目与协作实践</p>
+                    <h3>从原创世界观到可执行影像</h3>
+                    <p>《世纪ai》获校级推荐并进入国家级与市级候选评审；《司妖司》完成第一季全流程创作。持续以原创作品验证剧本、分镜、视觉开发、音乐和剪辑的统一导演能力。</p>
+                    <div><span>原创开发</span><span>世界观建立</span><span>团队协作</span></div>
+                  </article>
+                </div>
+              </section>
+
+              <section class="about-section about-section--evidence" aria-labelledby="evidenceTitle">
+                <div class="about-section-heading about-section-heading--split">
+                  <div><p>VISIBLE EVIDENCE</p><h2 id="evidenceTitle">证书与现场证明</h2></div>
+                  <p>点击图片可查看大图。项目、展览、荣誉与行业交流共同构成导演实践的可追溯证明。</p>
+                </div>
+                <div class="about-evidence-grid">
+                  <button class="about-evidence-card about-evidence-card--wide" type="button" data-about-image="./assets/about-evidence-exhibition.webp" data-about-caption="国家大剧院 · 艺象新生展览现场">
+                    <img src="./assets/about-evidence-exhibition.webp" alt="国家大剧院艺象新生展览现场" loading="lazy" />
+                    <span><strong>国家大剧院 · 艺象新生展览现场</strong><small>数字艺术展览实践</small></span>
+                  </button>
+                  <button class="about-evidence-card" type="button" data-about-image="./assets/about-evidence-work-award.webp" data-about-caption="2025年度在校生优秀作业奖二等奖 · 枯荣之歌">
+                    <img src="./assets/about-evidence-work-award.webp" alt="枯荣之歌优秀作业奖二等奖证书" loading="lazy" />
+                    <span><strong>优秀作业奖二等奖</strong><small>《枯荣之歌》 · 2025</small></span>
+                  </button>
+                  <button class="about-evidence-card" type="button" data-about-image="./assets/about-evidence-scholarship-2025.webp" data-about-caption="中央美术学院2024至2025学年优秀学生奖学金三等奖">
+                    <img src="./assets/about-evidence-scholarship-2025.webp" alt="优秀学生奖学金三等奖证书" loading="lazy" />
+                    <span><strong>优秀学生奖学金三等奖</strong><small>中央美术学院 · 2024至2025</small></span>
+                  </button>
+                  <button class="about-evidence-card" type="button" data-about-image="./assets/about-evidence-era2046.webp" data-about-caption="ERA 2046 天工协作奖">
+                    <img src="./assets/about-evidence-era2046.webp" alt="ERA 2046天工协作奖证书" loading="lazy" />
+                    <span><strong>ERA 2046 天工协作奖</strong><small>跨文化团队创作实践</small></span>
+                  </button>
+                  <button class="about-evidence-card" type="button" data-about-image="./assets/about-evidence-exhibition-doc.webp" data-about-caption="艺象新生原创参展材料">
+                    <img src="./assets/about-evidence-exhibition-doc.webp" alt="艺象新生原创参展材料" loading="lazy" />
+                    <span><strong>艺象新生原创参展材料</strong><small>原创作品与展览记录</small></span>
+                  </button>
+                  <button class="about-evidence-card" type="button" data-about-image="./assets/about-evidence-three-good.webp" data-about-caption="中央美术学院2023至2024学年三好学生">
+                    <img src="./assets/about-evidence-three-good.webp" alt="三好学生证书" loading="lazy" />
+                    <span><strong>三好学生</strong><small>中央美术学院 · 2023至2024</small></span>
+                  </button>
+                  <button class="about-evidence-card" type="button" data-about-image="./assets/about-evidence-scholarship-2024.webp" data-about-caption="中央美术学院2023至2024学年优秀学生奖学金二等奖">
+                    <img src="./assets/about-evidence-scholarship-2024.webp" alt="优秀学生奖学金二等奖证书" loading="lazy" />
+                    <span><strong>优秀学生奖学金二等奖</strong><small>中央美术学院 · 2023至2024</small></span>
+                  </button>
+                  <button class="about-evidence-card about-evidence-card--wide about-evidence-card--final" type="button" data-about-image="./assets/about-evidence-forum.webp" data-about-caption="中国动画协会 · 导演探讨AI演讲会">
+                    <img src="./assets/about-evidence-forum.webp" alt="中国动画协会导演探讨AI演讲会现场合影" loading="lazy" />
+                    <span><strong>中国动画协会 · 导演探讨AI演讲会</strong><small>行业交流与导演方法讨论</small></span>
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <div class="about-lightbox" id="aboutLightbox" aria-hidden="true">
+            <button class="about-lightbox-close" id="aboutLightboxClose" type="button" aria-label="关闭证明材料大图">×</button>
+            <img id="aboutLightboxImage" src="" alt="" />
+            <p id="aboutLightboxCaption"></p>
+          </div>
+        </section>
+
+        <section class="scene scene--process" id="processScene" aria-label="全流程导演能力展示" aria-hidden="true">
+          <img class="process-background" src="./assets/process-background.webp" alt="" aria-hidden="true" draggable="false" />
+          <div class="process-background-shade" aria-hidden="true"></div>
+
+          <header class="process-header">
+            <button class="process-back" id="processBack" type="button" aria-label="返回三扇门导航"><span aria-hidden="true">←</span></button>
+            <div class="process-heading">
+              <p>DIRECTING · STORYBOARD · PERFORMANCE · DELIVERY</p>
+              <h1>全流程导演能力</h1>
+            </div>
+            <p class="process-heading-note">AI是辅助工具，导演判断决定镜头为何存在</p>
+          </header>
+
+          <nav class="process-tabs" id="processTabs" aria-label="全流程能力章节">
+            <button class="is-active" data-process-target="overview" type="button"><span>00</span>能力总览</button>
+            <button data-process-target="prompt" type="button"><span>04</span>视频提示词</button>
+            <button data-process-target="music" type="button"><span>07</span>音乐生成</button>
+          </nav>
+
+          <div class="process-scroll" id="processScroll">
+            <div class="process-content" id="processContent"></div>
+          </div>
+          <div class="scroll-cue scroll-cue--process" id="processScrollCue" aria-hidden="true" hidden>向下滑动查看更多 <span>⌄</span></div>
+
+          <footer class="process-footer">
+            <button class="process-page-button" id="processPrev" type="button" aria-label="查看上一章节">← 上一章</button>
+            <div class="process-progress" aria-hidden="true"><span id="processProgressBar"></span></div>
+            <p id="processPageIndex">01 / 03</p>
+            <button class="process-page-button" id="processNext" type="button" aria-label="查看下一章节">下一章 →</button>
+          </footer>
+
+          <div class="process-lightbox" id="processLightbox" aria-hidden="true">
+            <button class="process-lightbox-close" id="processLightboxClose" type="button" aria-label="关闭大图">×</button>
+            <img id="processLightboxImage" src="" alt="" />
+            <p id="processLightboxCaption"></p>
+          </div>
+        </section>
+
+        <section class="scene scene--works" id="worksScene" aria-label="五个代表作品" aria-hidden="true">
+          <img class="scene-image" src="./assets/works.png" alt="五个洞穴分别通往五个代表作品" draggable="false" />
+          <img class="glitch-layer glitch-layer--a" src="./assets/works.png" alt="" aria-hidden="true" draggable="false" />
+          <img class="glitch-layer glitch-layer--b" src="./assets/works.png" alt="" aria-hidden="true" draggable="false" />
+          <div class="works-vignette" aria-hidden="true"></div>
+          <img class="project-label project-label--yueshi" data-label="yueshi" src="./assets/project-yueshi.png" alt="" aria-hidden="true" draggable="false" />
+          <img class="project-label project-label--kurong" data-label="kurong" src="./assets/project-kurong.png" alt="" aria-hidden="true" draggable="false" />
+          <img class="project-label project-label--memory" data-label="memory" src="./assets/project-memory.png" alt="" aria-hidden="true" draggable="false" />
+          <img class="project-label project-label--night" data-label="night" src="./assets/project-night.png" alt="" aria-hidden="true" draggable="false" />
+          <img class="project-label project-label--redmoon" data-label="redmoon" src="./assets/project-redmoon.png" alt="" aria-hidden="true" draggable="false" />
+          <button class="cave-hotspot cave-hotspot--1" data-project="yueshi" type="button" aria-label="查看粤食往生"></button>
+          <button class="cave-hotspot cave-hotspot--2" data-project="night" type="button" aria-label="查看夜行无声"></button>
+          <button class="cave-hotspot cave-hotspot--3" data-project="kurong" type="button" aria-label="查看枯荣之歌"></button>
+          <button class="cave-hotspot cave-hotspot--4" data-project="memory" type="button" aria-label="查看记忆褶皱"></button>
+          <button class="cave-hotspot cave-hotspot--5" data-project="redmoon" type="button" aria-label="查看赤月审判"></button>
+          <button class="back-button" id="worksBack" type="button">返回上一页</button>
+          <button class="back-button" id="worksPbr" type="button" aria-label="查看PBR三维作品">PBR三维制作</button>
+        </section>
+
+        <section class="scene scene--pbr" id="pbrScene" aria-label="PBR三维制作作品展示" aria-hidden="true">
+          <header class="pbr-header">
+            <button class="pbr-back" id="pbrBack" type="button" aria-label="返回代表作品页面">← <span>返回作品</span></button>
+            <div class="pbr-heading"><p>3D CHARACTER &amp; PROP DESIGN</p><h1>PBR三维制作</h1></div>
+            <button class="pbr-back pbr-directory" id="pbrDirectory" type="button" aria-label="返回目录">↩ <span>返回目录</span></button>
+          </header>
+          <nav class="pbr-nav" id="pbrNav" aria-label="选择三维作品组"></nav>
+          <div class="pbr-scroll" id="pbrScroll"><div class="pbr-content" id="pbrContent"></div></div>
+          <div class="scroll-cue scroll-cue--pbr" id="pbrScrollCue" aria-hidden="true" hidden>向下滑动查看更多 <span>⌄</span></div>
+          <div class="pbr-lightbox" id="pbrLightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="作品原图">
+            <button class="pbr-lightbox-close" id="pbrLightboxClose" type="button" aria-label="关闭作品原图">×</button>
+            <img id="pbrLightboxImage" src="" alt="" />
+            <p id="pbrLightboxCaption"></p>
+          </div>
+        </section>
+
+        <section class="scene scene--project" id="projectScene" aria-label="作品播放页" aria-hidden="true">
+          <div class="project-video-well">
+            <video id="projectVideo" class="project-video" preload="metadata" playsinline aria-label="作品完整视频"></video>
+            <div class="video-missing" id="videoMissing">
+              <strong id="videoMissingTitle">视频加载中</strong>
+              <span id="videoMissingDetail">请稍候…</span>
+            </div>
+            <div class="project-progress" id="projectProgress" aria-hidden="true">
+              <input id="projectProgressRange" type="range" min="0" max="0" value="0" step="0.01" aria-label="调节视频播放进度" />
+            </div>
+          </div>
+          <img class="project-frame" id="projectFrame" src="./assets/yueshi-frame.png" alt="粤食往生作品播放框架" draggable="false" />
+          <div class="project-info" aria-label="作品荣誉与创作信息">
+            <p class="project-honors" id="projectHonors" hidden></p>
+            <div class="project-meta" id="projectMeta">
+              <span id="projectName"></span>
+              <span id="projectCreated"></span>
+              <span id="projectModels"></span>
+            </div>
+          </div>
+          <article class="project-description" id="projectDescription">
+            <p class="description-page-index" id="descriptionPageIndex">01 / 04</p>
+            <button class="description-turn description-prev" id="descriptionPrev" type="button" aria-label="阅读上一页">
+              <span aria-hidden="true">‹</span>
+            </button>
+            <div class="description-copy">
+              <p id="descriptionText"></p>
+            </div>
+            <button class="description-turn description-next" id="descriptionNext" type="button" aria-label="阅读下一页">
+              <span aria-hidden="true">›</span>
+            </button>
+          </article>
+          <button class="ideas-open" id="ideasOpen" type="button" aria-label="打开作品制作思路">
+            <span class="ideas-open__icon" aria-hidden="true">▤</span>
+            <span>制作思路</span>
+          </button>
+          <button class="project-back-icon" id="projectBack" type="button" aria-label="返回上一页">返回上一页</button>
+        </section>
+
+        <section class="scene scene--ideas" id="ideasScene" aria-label="作品制作思路" aria-hidden="true">
+          <img class="ideas-background" id="ideasBackground" src="./assets/yueshi-ideas-bg.webp" alt="" aria-hidden="true" draggable="false" />
+          <div class="ideas-wash" aria-hidden="true"></div>
+          <header class="ideas-heading">
+            <p>CREATIVE PROCESS · VISUAL REFERENCES</p>
+            <h1 id="ideasHeadingTitle">作品创作思路</h1>
+          </header>
+
+          <div class="ideas-gallery is-current" id="ideasGalleryYueshi" data-ideas-project="yueshi" aria-label="Ollie Le Brocq 风格参考作品">
+            <button class="idea-card idea-card--1" style="--ratio: .8045; --deal: 0ms" type="button" aria-label="查看参考作品一">
+              <img src="./assets/yueshi-ref-01.webp" alt="Ollie Le Brocq 风格参考作品一" draggable="false" />
+            </button>
+            <button class="idea-card idea-card--2" style="--ratio: 1.0157; --deal: 115ms" type="button" aria-label="查看参考作品二">
+              <img src="./assets/yueshi-ref-02.webp" alt="Ollie Le Brocq 风格参考作品二" draggable="false" />
+            </button>
+            <button class="idea-card idea-card--3" style="--ratio: .7582; --deal: 230ms" type="button" aria-label="查看参考作品三">
+              <img src="./assets/yueshi-ref-03.webp" alt="Ollie Le Brocq 风格参考作品三" draggable="false" />
+            </button>
+            <button class="idea-card idea-card--4" style="--ratio: 1.0271; --deal: 345ms" type="button" aria-label="查看参考作品四">
+              <img src="./assets/yueshi-ref-04.webp" alt="Ollie Le Brocq 风格参考作品四" draggable="false" />
+            </button>
+            <button class="idea-card idea-card--5" style="--ratio: 1.0152; --deal: 460ms" type="button" aria-label="查看参考作品五">
+              <img src="./assets/yueshi-ref-05.webp" alt="Ollie Le Brocq 风格参考作品五" draggable="false" />
+            </button>
+            <button class="idea-card idea-card--6" style="--ratio: 1.0969; --deal: 575ms" type="button" aria-label="查看参考作品六">
+              <img src="./assets/yueshi-ref-06.webp" alt="Ollie Le Brocq 风格参考作品六" draggable="false" />
+            </button>
+            <button class="idea-card idea-card--7" style="--ratio: 1.1033; --deal: 690ms" type="button" aria-label="查看参考作品七">
+              <img src="./assets/yueshi-ref-07.webp" alt="Ollie Le Brocq 风格参考作品七" draggable="false" />
+            </button>
+          </div>
+
+          <div class="ideas-gallery ideas-gallery--kurong" id="ideasGalleryKurong" data-ideas-project="kurong" aria-label="Marc Chagall 风格参考作品">
+            <button class="idea-card kurong-card--1" style="--ratio: .8100; --deal: 0ms" type="button" aria-label="查看参考作品一"><img src="./assets/kurong-ref-01.webp" alt="Marc Chagall 风格参考作品一" draggable="false" /></button>
+            <button class="idea-card kurong-card--2" style="--ratio: .9150; --deal: 100ms" type="button" aria-label="查看参考作品二"><img src="./assets/kurong-ref-02.webp" alt="Marc Chagall 风格参考作品二" draggable="false" /></button>
+            <button class="idea-card kurong-card--3" style="--ratio: .8880; --deal: 200ms" type="button" aria-label="查看参考作品三"><img src="./assets/kurong-ref-03.webp" alt="Marc Chagall 风格参考作品三" draggable="false" /></button>
+            <button class="idea-card kurong-card--4" style="--ratio: .8630; --deal: 300ms" type="button" aria-label="查看参考作品四"><img src="./assets/kurong-ref-04.webp" alt="Marc Chagall 风格参考作品四" draggable="false" /></button>
+            <button class="idea-card kurong-card--5" style="--ratio: .7000; --deal: 400ms" type="button" aria-label="查看参考作品五"><img src="./assets/kurong-ref-05.webp" alt="Marc Chagall 风格参考作品五" draggable="false" /></button>
+            <button class="idea-card kurong-card--6" style="--ratio: .7910; --deal: 500ms" type="button" aria-label="查看参考作品六"><img src="./assets/kurong-ref-06.webp" alt="Marc Chagall 风格参考作品六" draggable="false" /></button>
+            <button class="idea-card kurong-card--7" style="--ratio: .7360; --deal: 600ms" type="button" aria-label="查看参考作品七"><img src="./assets/kurong-ref-07.webp" alt="Marc Chagall 风格参考作品七" draggable="false" /></button>
+            <button class="idea-card kurong-card--8" style="--ratio: .7220; --deal: 700ms" type="button" aria-label="查看参考作品八"><img src="./assets/kurong-ref-08.webp" alt="Marc Chagall 风格参考作品八" draggable="false" /></button>
+            <button class="idea-card kurong-card--9" style="--ratio: .6545; --deal: 800ms" type="button" aria-label="查看参考作品九"><img src="./assets/kurong-ref-09.webp" alt="Marc Chagall 风格参考作品九" draggable="false" /></button>
+            <button class="idea-card kurong-card--10" style="--ratio: .5431; --deal: 900ms" type="button" aria-label="查看参考作品十"><img src="./assets/kurong-ref-10.webp" alt="Marc Chagall 风格参考作品十" draggable="false" /></button>
+          </div>
+
+          <div class="ideas-gallery ideas-gallery--memory" id="ideasGalleryMemory" data-ideas-project="memory" aria-label="Sushizawa 风格参考作品">
+            <button class="idea-card memory-card--1" style="--ratio: .8160; --deal: 0ms" type="button" aria-label="查看参考作品一"><img src="./assets/memory-ref-01.webp" alt="Sushizawa 风格参考作品一" draggable="false" /></button>
+            <button class="idea-card memory-card--2" style="--ratio: .8130; --deal: 110ms" type="button" aria-label="查看参考作品二"><img src="./assets/memory-ref-02.webp" alt="Sushizawa 风格参考作品二" draggable="false" /></button>
+            <button class="idea-card memory-card--3" style="--ratio: .8080; --deal: 220ms" type="button" aria-label="查看参考作品三"><img src="./assets/memory-ref-03.webp" alt="Sushizawa 风格参考作品三" draggable="false" /></button>
+            <button class="idea-card memory-card--4" style="--ratio: .8120; --deal: 330ms" type="button" aria-label="查看参考作品四"><img src="./assets/memory-ref-04.webp" alt="Sushizawa 风格参考作品四" draggable="false" /></button>
+            <button class="idea-card memory-card--5" style="--ratio: .8110; --deal: 440ms" type="button" aria-label="查看参考作品五"><img src="./assets/memory-ref-05.webp" alt="Sushizawa 风格参考作品五" draggable="false" /></button>
+            <button class="idea-card memory-card--6" style="--ratio: .8040; --deal: 550ms" type="button" aria-label="查看参考作品六"><img src="./assets/memory-ref-06.webp" alt="Sushizawa 风格参考作品六" draggable="false" /></button>
+            <button class="idea-card memory-card--7" style="--ratio: .8050; --deal: 660ms" type="button" aria-label="查看参考作品七"><img src="./assets/memory-ref-07.webp" alt="Sushizawa 风格参考作品七" draggable="false" /></button>
+            <button class="idea-card memory-card--8" style="--ratio: .8240; --deal: 770ms" type="button" aria-label="查看参考作品八"><img src="./assets/memory-ref-08.webp" alt="Sushizawa 风格参考作品八" draggable="false" /></button>
+          </div>
+
+          <div class="ideas-gallery ideas-gallery--night" id="ideasGalleryNight" data-ideas-project="night" aria-label="夜行无声暗黑哥特与战术写实风格参考作品">
+            <button class="idea-card night-card--1" style="--ratio: 1.5012; --deal: 0ms" type="button" aria-label="查看夜行无声参考作品一"><img src="./assets/night-ref-01.webp" alt="暗黑战术干员近景参考图" draggable="false" /></button>
+            <button class="idea-card night-card--2" style="--ratio: 1.7797; --deal: 130ms" type="button" aria-label="查看夜行无声参考作品二"><img src="./assets/night-ref-02-v2.webp" alt="雾中战术小队参考图" draggable="false" /></button>
+            <button class="idea-card night-card--3" style="--ratio: 1.7778; --deal: 260ms" type="button" aria-label="查看夜行无声参考作品三"><img src="./assets/night-ref-03.webp" alt="夜间战术行动参考图" draggable="false" /></button>
+            <button class="idea-card night-card--4" style="--ratio: 1.9459; --deal: 390ms" type="button" aria-label="查看夜行无声参考作品四"><img src="./assets/night-ref-04.webp" alt="暗色战术装备参考图" draggable="false" /></button>
+            <button class="idea-card night-card--5" style="--ratio: 1.7773; --deal: 520ms" type="button" aria-label="查看夜行无声参考作品五"><img src="./assets/night-ref-05.webp" alt="冷色荒废铁路参考图" draggable="false" /></button>
+            <button class="idea-card night-card--6" style="--ratio: 1.7772; --deal: 650ms" type="button" aria-label="查看夜行无声参考作品六"><img src="./assets/night-ref-06.webp" alt="第一人称地下行动参考图" draggable="false" /></button>
+          </div>
+
+          <div class="ideas-gallery ideas-gallery--redmoon" id="ideasGalleryRedmoon" data-ideas-project="redmoon" aria-label="赤月审判哥特雨夜风格参考作品">
+            <button class="idea-card redmoon-card--1" style="--ratio: .6557; --deal: 0ms" type="button" aria-label="查看赤月审判参考作品一"><img src="./assets/redmoon-ref-01.webp" alt="雨夜哥特教堂参考图" draggable="false" /></button>
+            <button class="idea-card redmoon-card--2" style="--ratio: .5445; --deal: 130ms" type="button" aria-label="查看赤月审判参考作品二"><img src="./assets/redmoon-ref-02.webp" alt="黑白哥特都市参考图" draggable="false" /></button>
+            <button class="idea-card redmoon-card--3" style="--ratio: .6682; --deal: 260ms" type="button" aria-label="查看赤月审判参考作品三"><img src="./assets/redmoon-ref-03.webp" alt="阴郁古典城市参考图" draggable="false" /></button>
+            <button class="idea-card redmoon-card--4" style="--ratio: 1.7778; --deal: 390ms" type="button" aria-label="查看赤月审判参考作品四"><img src="./assets/redmoon-ref-04-v2.webp" alt="雨夜蝙蝠剪影参考图" draggable="false" /></button>
+            <button class="idea-card redmoon-card--5" style="--ratio: 1.7778; --deal: 520ms" type="button" aria-label="查看赤月审判参考作品五"><img src="./assets/redmoon-ref-05.webp" alt="阿卡姆骑士雨夜都市参考图" draggable="false" /></button>
+            <button class="idea-card redmoon-card--6" style="--ratio: 1.7778; --deal: 650ms" type="button" aria-label="查看赤月审判参考作品六"><img src="./assets/redmoon-ref-06.webp" alt="阿卡姆骑士城市天际线参考图" draggable="false" /></button>
+          </div>
+
+          <article class="ideas-process-sheet" id="yueshiProcessSheet" aria-label="粤食往生关键帧制作与视频提示词" hidden>
+            <div class="ideas-process-sheet__inner">
+              <header class="ideas-process-intro">
+                <p class="ideas-process-kicker">YUESHI · STORYBOARD TO KEYFRAME</p>
+                <h2>从草稿分镜到关键帧</h2>
+                <p>运用了四种关键帧制作方法。</p>
+              </header>
+              <div class="ideas-process-grid" aria-label="分镜草稿与关键帧对照">
+                <figure class="ideas-process-pair" style="--reveal-order: 0">
+                  <figcaption><strong>01 · AI 生图</strong></figcaption>
+                  <div class="ideas-process-pair__images"><div><img src="./assets/yueshi-process-ai.png" alt="AI 生图的鱼在水中游动" loading="lazy" /><span>AI 画面草稿</span></div><div><img src="./assets/yueshi-process-frame-06-corrected.webp" alt="粤食往生鱼群水下镜头关键帧 6" loading="lazy" /><span>关键帧 6</span></div></div>
+                </figure>
+                <figure class="ideas-process-pair" style="--reveal-order: 1">
+                  <figcaption><strong>02 · 抠图拼贴</strong></figcaption>
+                  <div class="ideas-process-pair__images"><div><img src="./assets/yueshi-process-collage.png" alt="餐盘、桌面和鱼片组合的抠图拼贴草稿" loading="lazy" /><span>抠图拼贴</span></div><div><img src="./assets/yueshi-process-frame-09.webp" alt="粤食往生餐桌上鱼片落点的关键帧 9" loading="lazy" /><span>关键帧 9</span></div></div>
+                </figure>
+                <figure class="ideas-process-pair" style="--reveal-order: 2">
+                  <figcaption><strong>03 · 手绘草稿</strong></figcaption>
+                  <div class="ideas-process-pair__images"><div><img src="./assets/yueshi-process-sketch-goose.png" alt="鹅的动作路线手绘草图" loading="lazy" /><span>手绘草稿</span></div><div><img src="./assets/yueshi-process-frame-07.webp" alt="粤食往生鹅被拉走的关键帧 7" loading="lazy" /><span>关键帧 7</span></div></div>
+                </figure>
+                <figure class="ideas-process-pair" style="--reveal-order: 3">
+                  <figcaption><strong>04 · 实拍参考</strong></figcaption>
+                  <div class="ideas-process-pair__images"><div><img src="./assets/yueshi-process-live.webp" alt="海面养殖场的实拍参考" loading="lazy" /><span>实拍参考</span></div><div><img src="./assets/yueshi-process-frame-10.webp" alt="粤食往生海面场景关键帧 10" loading="lazy" /><span>关键帧 10</span></div></div>
+                </figure>
+              </div>
+
+              <section class="ideas-prompt-section" aria-labelledby="yueshiPromptHeading">
+                <div class="ideas-prompt-heading"><p>VIDEO PROMPT · 00—60S</p><h2 id="yueshiPromptHeading">视频提示词展示</h2></div>
+                <div class="ideas-prompt-timeline">
+                  <article class="ideas-prompt-stage"><span>第一阶段（0-15s）</span><h3>从生机到盘中餐</h3><p class="ideas-prompt-focus">重点：水陆转场、快节奏片、第一视角磁吸跟拍</p><p>电影级高速追踪镜头，一条鲜活的鲑鱼在清澈碧绿的海水中逆流而上，慢动作拍打着水面。镜头在空中无缝切换：鲑鱼落到专业的木质砧板上，变成新鲜的半片鱼柳。厨师的双手在快速移动中模糊移动，将鲑鱼切成晶莹剔透的刺身，摆成色彩缤纷的粤式“七彩捞鱼”。镜头瞬间切换到厨师的主观视角：他快速走着，手里拿着盘子，摄像机运用“磁性主体追踪”和动态构图重建技术，将盘子重重地摔在餐桌上。4K超高清，超写实，节奏感强烈的剪辑。</p></article>
+                  <article class="ideas-prompt-stage"><span>第二阶段（15-30s）</span><h3>觅食尖与物种差异</h3><p class="ideas-prompt-focus">焦点：鱼眼镜头、漫画速度线、荒诞幽默转场</p><p>低角度固定鱼眼镜头向上拍摄一位年轻女孩。她用筷子夹起一片鲑鱼片。镜头猛烈地拉近，聚焦在生鱼片上。动作：在升降机的最高点，生鱼片像活物一样扭动，从筷子上滑落。镜头垂直下坠，跟随下落的鱼片，并添加风格化的漫画速度线，以增强速度感。鱼片落出画面，画面上方，一只肥硕的活鹅重重地摔在地上。它茫然地站起身，却被一只看不见的手猛地拽出画面右侧。</p></article>
+                  <article class="ideas-prompt-stage"><span>第三阶段（30-45s）</span><h3>烧鹅、深海与生蚝失重</h3><p class="ideas-prompt-focus">重点：横摇推进、上帝视角、盗梦空间式旋转</p><p>鹅被拉走的动作过渡到砧板上油光锃亮的烤粤式鹅。镜头从左至右缓慢摇摄，背景中出现一扇窗户。突然加速：镜头穿过窗户，朝着远处的海洋疾驰而去。俯视几何构图：镜头潜入水中，营造出雾气扩散效果。海底牡蛎的微距镜头。突然，葱、姜、蒜像流星一样从水面落下。在失重状态下，一切都剧烈震动。牡蛎肉从壳中弹出，飞入燃烧的炒锅。镜头锁定一只悬浮在空中的牡蛎，背景是深邃的散景。</p></article>
+                  <article class="ideas-prompt-stage"><span>第四阶段（45-60s）</span><h3>时空循环与诡异余韵</h3><p class="ideas-prompt-focus">重点：扭转、脑内穿梭、猎奇收尾</p><p>类似《盗梦空间》的轴向旋转：飞翔的牡蛎成为漩涡中心，背景旋转变形，最终变成女孩的后脑勺。镜头以广角鱼眼镜头穿过她的头骨，回到她手持鲑鱼的第一人称视角。鱼儿“啪嗒”一声掉在桌子上。一阵短暂的沉默（喜剧效果）。女孩停顿了一下，然后漫不经心地拿起另一片。镜头切换到真实角度：焦点转移到左下角，那里掉落的鲑鱼像蛆虫一样蠕动，爬下桌沿，溅起水花落入水中。4K，超现实主义，诡异氛围。</p></article>
+                </div>
+              </section>
+              <section class="ideas-storyboard-section" aria-labelledby="yueshiStoryboardHeading">
+              <div class="ideas-section-heading"><p>SHOT DESIGN · 20 SHOTS</p><h2 id="yueshiStoryboardHeading">《粤食往生》分镜表</h2><span>01:04.4 · 16:9 · 20 镜</span></div>
+              <p class="ideas-storyboard-note">按镜头时间浏览完整分镜；表格可左右滑动查看机位、光影与转场设计。</p>
+              <div class="ideas-storyboard-scroll" tabindex="0" role="region" aria-label="粤食往生二十镜分镜表，可横向滚动"><table class="ideas-storyboard-table"><thead><tr>
+              <th scope="col">镜号</th>
+              <th scope="col">分镜画面</th>
+              <th scope="col">时间／时长</th>
+              <th scope="col">景别・机位・运镜</th>
+              <th scope="col">画面内容与位置关系</th>
+              <th scope="col">光影设计</th>
+              <th scope="col">轴线与转场</th>
+              </tr></thead><tbody>
+              <tr>
+              <th scope="row">01</th>
+              <td><img src="./assets/yueshi-storyboard-01.webp" alt="第01镜分镜画面" loading="lazy" /></td>
+              <td>00:00.0—00:03.1<br />3.1秒</td>
+              <td>全景／侧面机位／静态展示</td>
+              <td>主角原是水池中一条自由游动的鱼，却因人类捕捞而失去自由。它不甘就此结束生命，这个倔强的灵魂因此获得了穿越重生的能力。</td>
+              <td>蓝绿色冷调为主，水面高光从上方切入；鱼身灰白受光，背景略暗以突出主体。</td>
+              <td>以鱼身的垂直方向为构图轴，水面横线稳定画面，并引出下一镜的案板空间。</td>
+              </tr>
+              <tr>
+              <th scope="row">02</th>
+              <td><img src="./assets/yueshi-storyboard-02.webp" alt="第02镜分镜画面" loading="lazy" /></td>
+              <td>00:03.1—00:05.3<br />2.2秒</td>
+              <td>俯视特写／固定机位</td>
+              <td>案板上出现红色鱼肉与鱼头，食材横向铺开；刀具与手部尚未入画，强调处理前的静置状态。</td>
+              <td>案板暖黄与鱼肉红色形成强对比，周围灰蓝桌面压低饱和度。</td>
+              <td>由水域转入餐厨空间，横向鱼身承接上一镜的主体方向。</td>
+              </tr>
+              <tr>
+              <th scope="row">03</th>
+              <td><img src="./assets/yueshi-storyboard-03.webp" alt="第03镜分镜画面" loading="lazy" /></td>
+              <td>00:05.3—00:07.4<br />2.1秒</td>
+              <td>俯视近景／手部操作／轻微推进</td>
+              <td>戴手套的双手持刀处理鱼肉，刀线沿鱼身切入；动作集中在画面中心偏右，形成制作过程中的第一处明确动作。</td>
+              <td>白色手套与银色刀面反光，鱼肉保持红橙主色，冷色桌面衬托操作区域。</td>
+              <td>刀具运动方向与鱼身一致，以切割动作的动势进入摆盘镜头。</td>
+              </tr>
+              <tr>
+              <th scope="row">04</th>
+              <td><img src="./assets/yueshi-storyboard-04.webp" alt="第04镜分镜画面" loading="lazy" /></td>
+              <td>00:07.4—00:11.8<br />4.4秒</td>
+              <td>俯视大全景转餐桌近景／固定机位</td>
+              <td>主角被制成广式特色菜《捞鱼生》，由俯视摆盘过渡到餐桌上的成品展示。</td>
+              <td>盘面色彩明亮，红、绿、黄分区清晰，整体光线均匀偏暖。</td>
+              <td>圆盘成为构图中心，由切割的线性运动转为圆形摆盘，并衔接餐桌空间。</td>
+              </tr>
+              <tr>
+              <th scope="row">05</th>
+              <td><img src="./assets/yueshi-storyboard-05.webp" alt="第05镜分镜画面" loading="lazy" /></td>
+              <td>00:11.8—00:13.4<br />1.6秒</td>
+              <td>中近景／正面机位／轻微推近</td>
+              <td>女孩坐在餐桌前夹起鱼片，面带微笑，主体位于画面中央；前景餐盘形成遮挡，突出即将进食的动作。</td>
+              <td>人物面部受柔和正面光，白衣与浅色背景保持清爽，食物红色成为视觉焦点。</td>
+              <td>视线与筷子方向共同指向食物，由摆盘中心自然转入人物中心。</td>
+              </tr>
+              <tr>
+              <th scope="row">06</th>
+              <td><img src="./assets/yueshi-storyboard-06.webp" alt="第06镜分镜画面" loading="lazy" /></td>
+              <td>00:13.4—00:16.6<br />3.2秒</td>
+              <td>极近景转仰视／动作衔接</td>
+              <td>仍保有灵魂意识的主角拼命扭动身体逃脱，并在空中完成下一次穿越。</td>
+              <td>口腔与肤色形成暖亮区域，随后切入明亮蓝天，强化逃脱瞬间。</td>
+              <td>从口腔局部轴转向空中的上升动势，以鱼肉飞离画面承接下一镜。</td>
+              </tr>
+              <tr>
+              <th scope="row">07</th>
+              <td><img src="./assets/yueshi-storyboard-07.webp" alt="第07镜分镜画面" loading="lazy" /></td>
+              <td>00:16.6—00:18.7<br />2.1秒</td>
+              <td>全景／平视／横向跟随</td>
+              <td>主角转生为乌鬃鹅，在鹅群前展翅活动。</td>
+              <td>户外蓝绿环境光明亮，鹅身受阳光勾边，地面暖色增强生活气息。</td>
+              <td>运动方向由左向右，以展翅动作延续上一镜的身体运动感。</td>
+              </tr>
+              <tr>
+              <th scope="row">08</th>
+              <td><img src="./assets/yueshi-storyboard-08.webp" alt="第08镜分镜画面" loading="lazy" /></td>
+              <td>00:18.7—00:22.6<br />3.9秒</td>
+              <td>中景／低机位／静态凝视</td>
+              <td>主角再次被人抓住，并被当作食材带走。</td>
+              <td>白鹅受正面光照亮，背景蓝灰阴影压低，主体轮廓清晰。</td>
+              <td>正面凝视打破上一镜的横向运动，以鹅的中轴建立其即将被食用的对象感。</td>
+              </tr>
+              <tr>
+              <th scope="row">09</th>
+              <td><img src="./assets/yueshi-storyboard-09.webp" alt="第09镜分镜画面" loading="lazy" /></td>
+              <td>00:22.6—00:25.3<br />2.7秒</td>
+              <td>近景／倾斜机位／缓慢旋转</td>
+              <td>主角被制成《广式烧鹅》，随后进入刀具处理的瞬间。</td>
+              <td>金橙高光集中在烧鹅表面，背景青蓝与灰色形成冷暖冲突。</td>
+              <td>从活体正面切到熟食斜向构图，再以刀具落下的动势衔接空镜。</td>
+              </tr>
+              <tr>
+              <th scope="row">10</th>
+              <td><img src="./assets/yueshi-storyboard-10.webp" alt="第10镜分镜画面" loading="lazy" /></td>
+              <td>00:25.3—00:26.2<br />0.9秒</td>
+              <td>空镜／室内全景／固定机位</td>
+              <td>刀起刀落之间，主角的灵魂再次逃脱，并穿越大海。</td>
+              <td>室内以冷绿阴影为主，窗外蓝色高亮，形成安静的间奏。</td>
+              <td>空镜缓冲上一镜的强烈转化，以水平线稳定节奏。</td>
+              </tr>
+              <tr>
+              <th scope="row">11</th>
+              <td><img src="./assets/yueshi-storyboard-11.webp" alt="第11镜分镜画面" loading="lazy" /></td>
+              <td>00:26.2—00:29.1<br />2.9秒</td>
+              <td>大远景／俯视／缓慢拉远</td>
+              <td>画面取景于广东汕头南澳岛的海上蚝田，广阔水面与养殖区铺展开来。</td>
+              <td>高调蓝白水面压低细节，橙褐色养殖排列成为重复的视觉符号。</td>
+              <td>养殖区排列形成透视线，由单一食材扩展为群体与海域意象。</td>
+              </tr>
+              <tr>
+              <th scope="row">12</th>
+              <td><img src="./assets/yueshi-storyboard-12.webp" alt="第12镜分镜画面" loading="lazy" /></td>
+              <td>00:29.1—00:33.0<br />3.9秒</td>
+              <td>近景／俯视／连续摆放</td>
+              <td>主角的灵魂穿越到生蚝身上；成串生蚝进入画面，随后被双手取下并配入姜葱。</td>
+              <td>食材冷暖色交错，手部高光清晰，背景保持浅蓝灰。</td>
+              <td>双手从左右进入形成对称操作，串状竖线承接上一镜养殖区的排列。</td>
+              </tr>
+              <tr>
+              <th scope="row">13</th>
+              <td><img src="./assets/yueshi-storyboard-13.webp" alt="第13镜分镜画面" loading="lazy" /></td>
+              <td>00:33.0—00:34.3<br />1.3秒</td>
+              <td>特写／俯视／固定机位</td>
+              <td>主角又被制成《姜葱炒生蚝》。</td>
+              <td>橙黄色火焰高饱和，贝壳白色强反光，黑色锅边形成强烈框景。</td>
+              <td>圆形锅具延续圆形构图，火焰向上的动势引出下一镜。</td>
+              </tr>
+              <tr>
+              <th scope="row">14</th>
+              <td><img src="./assets/yueshi-storyboard-14.webp" alt="第14镜分镜画面" loading="lazy" /></td>
+              <td>00:34.3—00:37.4<br />3.1秒</td>
+              <td>极近景／俯视／旋转运动</td>
+              <td>主角的灵魂再次穿越，生蚝逐渐被卷入旋转的水流。</td>
+              <td>贝肉乳白高亮，外圈蓝灰与深褐旋转，形成中心聚光。</td>
+              <td>以贝壳为中心轴，旋转水流直接引出抽象旋涡镜头。</td>
+              </tr>
+              <tr>
+              <th scope="row">15</th>
+              <td><img src="./assets/yueshi-storyboard-15.webp" alt="第15镜分镜画面" loading="lazy" /></td>
+              <td>00:37.4—00:39.5<br />2.1秒</td>
+              <td>抽象镜头／中心构图／快速旋转</td>
+              <td>画面转化为蓝黄相间的旋涡，现实中的食材形态被抽象为吞噬与循环的视觉符号。</td>
+              <td>深蓝与金黄对冲，中心黑蓝下沉，制造强烈的吸入感。</td>
+              <td>旋涡中心成为唯一轴点，以抽象转场连接餐桌场景。</td>
+              </tr>
+              <tr>
+              <th scope="row">16</th>
+              <td><img src="./assets/yueshi-storyboard-16.webp" alt="第16镜分镜画面" loading="lazy" /></td>
+              <td>00:39.5—00:41.6<br />2.1秒</td>
+              <td>过肩俯视／轻微推近</td>
+              <td>主角终于穿越到开头的女孩身上。</td>
+              <td>桌面食物色彩丰富，人物头发的暗部压住前景，形成视线导向。</td>
+              <td>人物背部成为前景轴线，旋涡中心转化为桌面中心。</td>
+              </tr>
+              <tr>
+              <th scope="row">17</th>
+              <td><img src="./assets/yueshi-storyboard-17.webp" alt="第17镜分镜画面" loading="lazy" /></td>
+              <td>00:41.6—00:45.2<br />3.6秒</td>
+              <td>餐桌近景／俯视／静态</td>
+              <td>主角成为起初自己认定的“罪魁祸首”。</td>
+              <td>多色菜盘形成高饱和拼贴，食物红色与桌布蓝色构成冷暖对比。</td>
+              <td>以筷子的夹取方向引导视线，群像食物承接上一镜的桌面空间。</td>
+              </tr>
+              <tr>
+              <th scope="row">18</th>
+              <td><img src="./assets/yueshi-storyboard-18.webp" alt="第18镜分镜画面" loading="lazy" /></td>
+              <td>00:45.2—00:48.1<br />2.9秒</td>
+              <td>正面近景／轻微推近</td>
+              <td>主角获得了处置这些食物的权力。</td>
+              <td>面部亮度最高，眼睛反光突出，肉片红色贴近镜头形成压迫感。</td>
+              <td>人物正面轴明确，由餐桌群像收束到进食瞬间。</td>
+              </tr>
+              <tr>
+              <th scope="row">19</th>
+              <td><img src="./assets/yueshi-storyboard-19.webp" alt="第19镜分镜画面" loading="lazy" /></td>
+              <td>00:48.1—00:55.5<br />7.4秒</td>
+              <td>俯视近景／固定机位</td>
+              <td>看着手中的鱼肉仿佛重新获得生命、从自己面前逃离，主角意识到，那或许正是尚未穿越时的自己。</td>
+              <td>蓝色桌面大面积铺开，橙色鱼肉孤立突出，整体光线转冷。</td>
+              <td>从人物正面切到桌面俯视，孤立的鱼肉成为新的视觉轴。</td>
+              </tr>
+              <tr>
+              <th scope="row">20</th>
+              <td><img src="./assets/yueshi-storyboard-20.webp" alt="第20镜分镜画面" loading="lazy" /></td>
+              <td>00:55.5—01:04.4<br />8.9秒</td>
+              <td>俯视特写转片名／变焦与淡出</td>
+              <td>主角看着曾经的自己一步步蠕动逃离、投入轮回，最终获得往生；片名《粤食往生》显现，为故事收束。</td>
+              <td>蓝色桌面与水面旋涡交替闪动，随后转入黑底白字，明暗反差完成情绪落点。</td>
+              <td>鱼肉沿画面中轴向水面移动，变焦脉冲强化穿越感；旋涡与片名淡出构成最终闭环。</td>
+              </tr>
+              </tbody></table></div></section>
+              <section class="ideas-software-section" aria-labelledby="yueshiSoftwareHeading">
+                <div class="ideas-section-heading"><p>TOOLS · PRODUCTION</p><h2 id="yueshiSoftwareHeading">作品使用的软件</h2></div>
+                <div class="ideas-software-grid">
+                  <div class="ideas-software-card" style="--tool-order:0"><img src="./assets/yueshi-software-midjourney.webp" alt="Midjourney 图标" loading="lazy" /><span>Midjourney</span></div>
+                  <div class="ideas-software-card" style="--tool-order:1"><img src="./assets/yueshi-software-capcut.webp" alt="剪映图标" loading="lazy" /><span>剪映</span></div>
+                  <div class="ideas-software-card" style="--tool-order:2"><img src="./assets/yueshi-software-ace.webp" alt="ACE Studio 图标" loading="lazy" /><span>ACE Studio</span></div>
+                  <div class="ideas-software-card" style="--tool-order:3"><img src="./assets/yueshi-software-photoshop.webp" alt="Photoshop 图标" loading="lazy" /><span>Photoshop</span></div>
+                  <div class="ideas-software-card" style="--tool-order:4"><img src="./assets/yueshi-software-chatgpt.webp" alt="ChatGPT 图标" loading="lazy" /><span>ChatGPT</span></div>
+                </div>
+              </section>
+            </div>
+          </article>
+
+          <article class="ideas-process-sheet ideas-process-sheet--other" id="otherProcessSheet" aria-label="作品制作过程" hidden>
+            <div class="ideas-process-sheet__inner" id="otherProcessContent"></div>
+          </article>
+          <div class="scroll-cue scroll-cue--ideas" id="ideasScrollCue" aria-hidden="true" hidden>向下滑动查看更多 <span>⌄</span></div>
+
+          <article class="ideas-copy-panel">
+            <p class="ideas-page-index" id="ideasPageIndex">01 / 03</p>
+            <button class="ideas-turn ideas-prev" id="ideasPrev" type="button" aria-label="阅读上一页"><span aria-hidden="true">‹</span></button>
+            <div class="ideas-copy" id="ideasCopy">
+              <h2 id="ideasCopyTitle">灵感来源与风格参考</h2>
+              <div id="ideasCopyText"></div>
+            </div>
+            <button class="ideas-turn ideas-next" id="ideasNext" type="button" aria-label="阅读下一页"><span aria-hidden="true">›</span></button>
+          </article>
+
+          <button class="back-button ideas-back" id="ideasBack" type="button" aria-label="返回上一页">返回上一页</button>
+          <button class="ideas-open is-visible ideas-top-next" id="ideasTopNext" type="button" aria-label="进入下一页">
+            <span>进入下一页</span>
+          </button>
+          <button class="ideas-open ideas-next-project" id="ideasNextProject" type="button" aria-label="进入下一个作品">进入下一个作品</button>
+        </section>
+
+        <div class="portal-flash" id="portalFlash" aria-hidden="true"></div>
+
+        <section class="content-panel" id="contentPanel" aria-hidden="true" aria-label="内容详情">
+          <button class="panel-close" id="panelClose" type="button" aria-label="关闭详情">×</button>
+          <div class="panel-scroll" id="panelBody"></div>
+        </section>
+      </div>
+
+      <p class="rotate-hint">建议横屏观看</p>
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
