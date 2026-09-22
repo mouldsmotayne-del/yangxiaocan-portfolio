@@ -1557,6 +1557,68 @@ function renderNightProcess() {
       <p class="night-workflow-judgment"><strong>DIRECTOR JUDGMENT</strong> 面对枪械识别限制，以遮挡、弱化、改变景别与镜头替换维持叙事完整。</p>
       <figure class="night-workflow-map"><a href="./assets/night-workflow-map.png" target="_blank" rel="noopener" aria-label="查看夜行无声完整工作流图"><img src="./assets/night-workflow-map.png" alt="夜行无声创意策划、视觉开发、分镜与动态、音乐与后期工作流图" loading="lazy" /></a><figcaption>完整工作流图 · 点击放大查看</figcaption></figure>
     </section>
+    <section class="ideas-storyboard-section night-challenge-section" aria-labelledby="nightChallengeHeading">
+      <header class="night-challenge-heading">
+        <p>PRODUCTION CHALLENGE</p>
+        <h2 id="nightChallengeHeading">枪械镜头生成受限，如何完成动作叙事</h2>
+        <p class="night-challenge-subtitle">通过多模型测试、分镜调整与后期合成，完成难以稳定生成的镜头。</p>
+      </header>
+
+      <article class="night-challenge-row night-challenge-row--problem">
+        <figure class="night-challenge-figure night-challenge-figure--error">
+          <div class="night-challenge-error-crop">
+            <svg viewBox="0 0 1534 825" role="img" aria-label="保留视频生成界面、完整报错框与参考图缩略图，并去除下方提示词的原始生成记录" preserveAspectRatio="xMidYMid meet"><image href="./assets/night-challenge-generation-error.png" x="0" y="0" width="1534" height="1542" /></svg>
+          </div>
+          <figcaption>生成测试记录｜相关任务受到平台限制，未能获得可用视频。</figcaption>
+        </figure>
+        <div class="night-challenge-copy">
+          <span>主要问题</span>
+          <p>制作中，包含枪械的动作镜头多次受到平台限制，难以稳定获得可用素材，影响了原定分镜的实现。难点在于找到可执行的制作方式，同时保留动作与剧情信息。</p>
+        </div>
+      </article>
+
+      <article class="night-challenge-row night-challenge-row--attempt">
+        <figure class="night-challenge-figure">
+          <a href="./assets/night-challenge-green-mask.png" target="_blank" rel="noopener" aria-label="放大查看绿色遮盖测试图">
+            <img src="./assets/night-challenge-green-mask.png" alt="对参考图中的枪械区域进行绿色纯色遮盖的测试图" loading="lazy" />
+          </a>
+          <figcaption>未成功的尝试｜对参考图中的枪械区域进行纯色遮盖。</figcaption>
+        </figure>
+        <div class="night-challenge-copy">
+          <span>尝试与判断</span>
+          <p>我先后尝试纯色遮盖、模糊处理、调整为玩具枪描述，以及取消参考图、仅使用文字描述，均未形成稳定可用的方案。因此，我将制作重点转向分镜调整与后期处理。</p>
+        </div>
+      </article>
+
+      <div class="night-challenge-cards" aria-label="解决办法">
+        <article><span>01</span><h3>多模型测试</h3><p>测试不同模型并筛选可用素材，其中获得的片段用于成片 00:20—00:22 处。由于这一方式仍不稳定，后续结合分镜调整和后期处理完成制作。</p></article>
+        <article><span>02</span><h3>调整分镜</h3><p>修改原有构图和呈现角度，减少枪械正面展示，在现有制作条件下保留动作与剧情信息。</p></article>
+        <article><span>03</span><h3>后期合成</h3><p>对于仍需出现枪械的镜头，通过后期合成补入相关元素。结尾镜头采用这一方式，完成最终画面。</p></article>
+      </div>
+
+      <div class="night-challenge-application" aria-labelledby="nightChallengeApplicationHeading">
+        <h3 id="nightChallengeApplicationHeading">成片中的应用</h3>
+        <div class="night-challenge-final-grid">
+          <figure>
+            <video controls muted playsinline preload="metadata" poster="./assets/night-challenge-final-0021.jpg" aria-label="夜行无声成片二十秒到二十二秒的无声案例视频">
+              <source src="./assets/night-challenge-final-0020-0022.mp4" type="video/mp4" />
+            </video>
+            <figcaption>成片 00:20—00:22｜多模型测试后筛选采用的片段。</figcaption>
+          </figure>
+          <figure>
+            <video controls muted playsinline preload="metadata" poster="./assets/night-challenge-final-ending.jpg" aria-label="夜行无声结尾后期合成镜头的无声案例视频">
+              <source src="./assets/night-challenge-final-ending.mp4" type="video/mp4" />
+            </video>
+            <figcaption>结尾镜头｜通过后期合成补入枪械元素。</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <aside class="night-challenge-review">
+        <span>项目复盘</span>
+        <p>这次制作让我认识到，需要在分镜阶段提前测试实现难度较高的镜头。当生成方式无法稳定支撑设计时，应及时调整镜头表达，并将部分画面交由后期完成，为关键镜头准备可执行的替代方案。</p>
+      </aside>
+    </section>
     <section class="ideas-storyboard-section night-design-section" aria-label="夜行无声角色设计与配色">
       <div class="ideas-section-heading"><p>CHARACTER DESIGN · COLOR PALETTE</p><h2>角色设计与配色</h2></div>
       <p class="night-process-note">从面部夜视装置、战术服轮廓和装备挂载出发，校准角色正面、侧面与背面的造型；以暗色皮革为主体，用冷紫与弹药蓝区分布料、金属和功能部件。</p>
