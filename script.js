@@ -86,23 +86,19 @@ const pbrLightboxImage = document.querySelector('#pbrLightboxImage');
 const pbrLightboxCaption = document.querySelector('#pbrLightboxCaption');
 const pbrLightboxClose = document.querySelector('#pbrLightboxClose');
 
-const uiClickSound = new Audio('./assets/ui-click.mp3');
 const windTransitionSound = new Audio('./assets/wind-transition.mp3');
 const bookFlipSound = new Audio('./assets/book-flip.mp3');
 const cardDealSound = new Audio('./assets/card-deal.mp3');
 const backgroundMusic = new Audio('./assets/portfolio-bgm.mp3');
-const processClickSound = new Audio('./assets/process-click.mp3');
 const audioUnlockHint = document.querySelector('#audioUnlockHint');
 
-[uiClickSound, windTransitionSound, bookFlipSound, cardDealSound, backgroundMusic, processClickSound].forEach((sound) => {
+[windTransitionSound, bookFlipSound, cardDealSound, backgroundMusic].forEach((sound) => {
   sound.preload = 'auto';
 });
 
-uiClickSound.volume = .82;
 windTransitionSound.volume = .48;
 bookFlipSound.volume = .72;
 cardDealSound.volume = .58;
-processClickSound.volume = .72;
 backgroundMusic.loop = true;
 backgroundMusic.autoplay = true;
 
@@ -159,7 +155,7 @@ function silenceBackgroundMusic(duration = 680) {
   fadeBackgroundMusic(0, duration);
 }
 
-function unlockBackgroundMusicOnFirstInteraction() {
+function unlockBackgroundMusicOnFirstInteraction(event) {
   if (projectScene.classList.contains('is-active') || !backgroundMusic.paused) return;
   backgroundMusic.play().then(() => {
     audioUnlockHint.hidden = true;
@@ -182,17 +178,6 @@ function tryStartBackgroundMusic() {
 }
 tryStartBackgroundMusic();
 window.addEventListener('pageshow', tryStartBackgroundMusic);
-
-document.addEventListener('click', (event) => {
-  const button = event.target.closest('button');
-  if (!button || button.disabled) return;
-  if (processScene.classList.contains('is-active')) {
-    playFromStart(processClickSound);
-    return;
-  }
-  const isOpeningPage = [introScene, hubScene, worksScene].some((scene) => scene.classList.contains('is-active'));
-  if (isOpeningPage) playFromStart(uiClickSound);
-}, true);
 
 const doorLayers = {
   right: document.querySelector('#doorRightLayer'),
@@ -258,7 +243,7 @@ const processMaterials = {
   },
 };
 
-const nextPortfolioWork = {yueshi: 'night', night: 'kurong', kurong: 'memory', memory: 'redmoon'};
+const nextPortfolioWork = {kurong: 'redmoon', redmoon: 'yueshi', yueshi: 'night', night: 'memory'};
 
 const projectData = {
   yueshi: {
@@ -268,7 +253,7 @@ const projectData = {
     frame: './assets/yueshi-frame.png',
     frameAlt: '粤食往生油画质感作品播放框架',
     video: './assets/yueshi.mp4',
-    origin: '7% 48%',
+    origin: '50% 52%',
     pages: [
       '《粤食往生》是一部融合实验影像与岭南饮食文化的艺术短片，以粤菜食材为核心载体，构建超现实生命轮回叙事。整体基调兼具紧张刺激、未知探险与荒诞幽默，依托极致镜头语言打造强节奏视觉体验。',
       '作品以食材生命形态流转为叙事线索，打破常规美食影像逻辑，解构饮食与生命的边界。从三文鱼水域游动、跃出水面转场为食材，经烹饪成为菜品，再到刺身挣脱、异变轮回为鹅，继而转化为烧鹅，衔接水下生蚝与爆炒场景，最终形成时空闭环，完成食材从自然到餐桌、再回归自然的往生之旅，暗含对生命意志与万物联结的表达。',
@@ -284,7 +269,7 @@ const projectData = {
     frame: './assets/project-kurong-frame.png',
     frameAlt: '枯荣之歌彩色绘画作品播放框架',
     video: './assets/kurong.mp4',
-    origin: '50% 52%',
+    origin: '7% 48%',
     pages: [
       '《枯荣之歌》是以“消亡—转化—新生”为核心轮回观的音乐动画，旨在以拉丁美洲式的热烈生命力，赞颂生命的激情与欢乐。',
       '视觉上，将采用高饱和度的黄绿、红蓝与暖橙色调，结合表现主义与超现实主义的自由笔触，营造色彩浓烈、笔触写意的炽热氛围。线条与色块在运动中兼具装饰性与情绪张力，画面轻盈而充满律动。',
@@ -299,7 +284,7 @@ const projectData = {
     frame: './assets/project-memory-frame.png',
     frameAlt: '记忆褶皱青红色作品播放框架',
     video: './assets/memory.mp4',
-    origin: '72% 52%',
+    origin: '93% 48%',
     pages: [
       '《记忆褶皱》是一部以抽象视觉语言表现“记忆的失真与重组”的实验性艺术短片，借三段式人生叙事——降生、受控、蜕变——讲述一个生命从懵懂入世、被无形力量掌控，到觉醒并亲手斩断枷锁、破茧重生的精神历程。',
       '题材定位：记忆主题的抽象艺术影像（实验／诗性叙事短片），核心不在情节，而在情绪与隐喻。',
@@ -314,7 +299,7 @@ const projectData = {
     frame: './assets/project-night-frame.png',
     frameAlt: '夜行无声暗色洞穴作品播放框架',
     video: './assets/night.mp4',
-    origin: '29% 52%',
+    origin: '72% 52%',
     pages: [
       '《夜行无声》是一部以“追踪—潜入—压制—清剿”为行动链，控制景别、角色走位、轴线和运镜的角色个人展示短片。枪械镜头受限时，通过遮挡、弱化与景别替换维持叙事。',
     ],
@@ -326,7 +311,7 @@ const projectData = {
     frame: './assets/project-redmoon-frame.png',
     frameAlt: '赤月审判红黑色作品播放框架',
     video: './assets/redmoon.mp4',
-    origin: '93% 48%',
+    origin: '29% 52%',
     pages: [
       '《赤月审判》是一部以红月雨夜中的异常生命追踪为核心，将哥特猎魔意象与近未来侦察技术融合，通过“发现痕迹—锁定目标—药剂显形—完成审判”的叙事递进，塑造冷静、克制而危险的暗夜猎人形象。',
     ],
@@ -433,7 +418,7 @@ const ideasProjectData = {
       },
       {
         title: '风格参考',
-        html: '<p><strong>战术写实风游戏。</strong></p><p>代表参考包括《三角洲行动》《彩虹六号：围攻》《逃离塔科夫》等同品类作品。参考重点不是照搬角色外形，而是提取装备组织、材质表现、动作逻辑与夜战氛围。</p>',
+        html: '<p><strong>战术写实风游戏。</strong></p><p>参考同品类作品的装备组织、材质表现、动作逻辑与夜战氛围，重点是提取可服务本作叙事的视觉语言，而非照搬角色外形。</p>',
       },
       {
         title: '视觉特征与配色',
@@ -1703,11 +1688,11 @@ function renderNightProcess() {
 }
 
 function renderKurongProcess() {
-  const frames = [
-    ['kurong-keyframe-forest-awakening.webp', '光中苏醒 · 生命初现'],
-    ['kurong-keyframe-forest-flight.webp', '林间飞行 · 空间延展'],
-    ['kurong-keyframe-three-fairies.webp', '精灵同行 · 群体汇聚'],
-    ['kurong-keyframe-circle-dance.webp', '环绕起舞 · 节奏高潮']
+  const sketchToKeyframe = [
+    ['节奏与环绕构图', 'kurong-draft-01.png', 'kurong-frame-05.png'],
+    ['群像动作关系', 'kurong-draft-02.png', 'kurong-frame-06-revised.png'],
+    ['落叶中的精灵', 'kurong-draft-03.png', 'kurong-frame-07.png'],
+    ['林间集体舞蹈', 'kurong-draft-04.png', 'kurong-frame-08.png']
   ];
   otherProcessContent.innerHTML = `
     <section class="kurong-music-section" aria-label="枯荣之歌音乐分析">
@@ -1718,12 +1703,34 @@ function renderKurongProcess() {
         <article class="kurong-music-card"><a href="./assets/kurong-music-rhythm.webp" target="_blank" rel="noopener" aria-label="查看音乐节拍分析原图"><img src="./assets/kurong-music-score.webp" alt="墨西哥沙龙乐谱节拍分析参考" loading="lazy" /></a><div><span>02 / 节奏转换</span><h3>以 2/4 拍组织镜头</h3><p>分析强弱交替与重音位置，把节拍转为角色动作、运镜速度与剪辑落点；强拍推进群舞，弱拍保留轻盈的延续感。</p><a class="kurong-evidence-link" href="./assets/kurong-music-rhythm.webp" target="_blank" rel="noopener">查看完整节拍分析 ↗</a></div></article>
       </div>
     </section>
-    <section class="ideas-storyboard-section" aria-label="草稿分镜与关键帧对照">
-      <div class="ideas-section-heading"><p>EARLY STORYBOARD → KEYFRAMES</p><h2>从早期分镜到动画关键帧</h2></div>
-      <p class="kurong-process-note">沿用《粤食往生》的对照展示方式：左侧是早期 28 镜、192 秒分镜节选；右侧以四张关键帧展示精灵苏醒、林间飞行、群体汇聚与环绕起舞的画面处理。早期分镜用于比较构图与节奏，不等同下方 31 镜最终分镜表。</p>
-      <div class="kurong-development-grid">
-        <figure class="kurong-early-storyboard"><a href="./assets/kurong-early-storyboard.png" target="_blank" rel="noopener" aria-label="查看完整二十八镜早期分镜原图"><img src="./assets/kurong-early-storyboard.png" alt="枯荣之歌早期二十八镜分镜表，包含分镜画面、景别、时长、镜头角度及灯光" loading="lazy" /></a></figure>
-        <div class="kurong-selected-frames">${frames.map(([filename, caption], index) => `<figure class="ideas-process-pair" style="--reveal-order:${index + 1}"><img class="ideas-process-evidence" src="./assets/${filename}" alt="《枯荣之歌》动画关键帧：${caption}" loading="lazy" /><figcaption><strong>${caption}</strong></figcaption></figure>`).join('')}</div>
+    <section class="ideas-storyboard-section kurong-comparison-section" aria-label="枯荣之歌草稿与关键帧对照">
+      <div class="ideas-section-heading"><p>SKETCH → KEYFRAME</p><h2>草稿与关键帧对照</h2></div>
+      <p class="kurong-process-note">四组画面按构图与动作关系配对。左侧记录节奏草图或前期视觉参考，右侧展示对应的绘画风格关键帧；点击图片可查看完整画面。</p>
+      <div class="kurong-comparison-grid">${sketchToKeyframe.map(([title, draft, frame], index) => `
+        <article class="kurong-comparison-pair" aria-label="第${index + 1}组：${title}">
+          <div class="kurong-comparison-images">
+            <figure><a href="./assets/${draft}" target="_blank" rel="noopener" aria-label="查看${title}前期草稿或参考画面"><img src="./assets/${draft}" alt="${title}的前期草稿或视觉参考" loading="lazy"></a><figcaption>草稿 / 前期参考</figcaption></figure>
+            <figure><a href="./assets/${frame}" target="_blank" rel="noopener" aria-label="查看${title}关键帧"><img src="./assets/${frame}" alt="${title}的对应关键帧" loading="lazy"></a><figcaption>关键帧</figcaption></figure>
+          </div>
+        </article>`).join('')}</div>
+    </section>
+    <section class="ideas-storyboard-section kurong-judgment-section" aria-labelledby="kurongJudgmentHeading">
+      <div class="ideas-section-heading"><p>DIRECTOR'S AESTHETIC DECISION</p><h2 id="kurongJudgmentHeading">导演的审美判断</h2></div>
+      <div class="kurong-judgment-grid">
+        <article class="kurong-judgment-card">
+          <div class="kurong-judgment-images">
+            <figure class="is-chosen"><a href="./assets/kurong-frame-07.png" target="_blank" rel="noopener" aria-label="查看图7最终选用版本"><img src="./assets/kurong-frame-07.png" alt="图7：冷暖与空间层次更均衡的方案" loading="lazy"></a><figcaption>图7 · 选用</figcaption></figure>
+            <figure><a href="./assets/kurong-alternate-09.png" target="_blank" rel="noopener" aria-label="查看图9未采用版本"><img src="./assets/kurong-alternate-09.png" alt="图9：整体偏火热的橙红色方案" loading="lazy"></a><figcaption>图9 · 未采用</figcaption></figure>
+          </div>
+          <p><strong>色调与空间：</strong>选择图7。它的冷暖分布更和谐、均匀，前后景也有层次；图9的火热橙红占比过高，色彩单一，空间感不足。</p>
+        </article>
+        <article class="kurong-judgment-card">
+          <div class="kurong-judgment-images">
+            <figure class="is-chosen"><a href="./assets/kurong-choice-10.png" target="_blank" rel="noopener" aria-label="查看图10最终选用版本"><img src="./assets/kurong-choice-10.png" alt="图10：冷色空间中白色主角更醒目" loading="lazy"></a><figcaption>图10 · 选用</figcaption></figure>
+            <figure><a href="./assets/kurong-alternate-11.png" target="_blank" rel="noopener" aria-label="查看图11未采用版本"><img src="./assets/kurong-alternate-11.png" alt="图11：色调更明亮的另一方案" loading="lazy"></a><figcaption>图11 · 未采用</figcaption></figure>
+          </div>
+          <p><strong>主角与情绪：</strong>选择图10。较深的冷色空间拉开景深，也增强白色主角与背景的对比，使视线更集中；在进入新世界前，冷色调更符合此时的情绪铺垫。</p>
+        </article>
       </div>
     </section>
     <section class="ideas-storyboard-section" aria-label="枯荣之歌最终分镜表">
@@ -1872,13 +1879,19 @@ function renderRedmoonProcess() {
   const shotNotes = [
     ['交代故事发生空间、时代环境与事件背景，用远景营造压抑氛围，确立雨夜都市世界观基调。', 70, 175],
     ['镜头凸显异常样本状态，结合前景报纸内容交代世界观设定，并引出猎人职业与红色药剂设计。', 748, 175],
-    ['近景运用 NPC 交代与三角洲行动世界观联系，同时分开两个相似景别的镜头。', 1426, 175],
+    ['近景交代普通办案人员负责封锁现场、记录与取证；随后转向主角，他从异常线索中主动追查真相。职责与行动目标的对照，让主角成为叙事焦点。', 1426, 175],
     ['全景交代主角出场，框架式构图突出主体剪影，完成猎人正式亮相。', 70, 639],
     ['第一人称带入视角交代主角右眼夜视仪，观察异常生命体留下的信息素并进行追踪分析。', 748, 639],
     ['人物定格收尾，面部特写锁定角色神态与标志性装备，强化冷峻危险的人设标签。', 1426, 639]
   ];
   const crop = (file, width, height, x, y, w, h, label) => `<svg viewBox="${x} ${y} ${w} ${h}" role="img" aria-label="${label}"><image href="./assets/${file}" x="0" y="0" width="${width}" height="${height}" /></svg>`;
   const shots = shotNotes.map(([note, x, y], i) => `<figure class="redmoon-shot"><div class="redmoon-shot-image">${crop('redmoon-shot-analysis.png', 2048, 1124, x, y, 594, 220, `镜头 ${i + 1} 的画面`)}</div><figcaption><span>SHOT ${String(i + 1).padStart(2, '0')}</span><p>${note}</p></figcaption></figure>`).join('');
+  const draftToFrame = [
+    ['侦察视角', 'redmoon-draft-01.png', 'redmoon-frame-01.jpg'],
+    ['主角背影', 'redmoon-draft-02.png', 'redmoon-frame-02.jpg'],
+    ['面部近景', 'redmoon-draft-03.png', 'redmoon-frame-03.png'],
+    ['雨夜现场', 'redmoon-draft-04.png', 'redmoon-frame-04.jpg'],
+  ];
   otherProcessContent.innerHTML = `
     <header class="ideas-process-intro redmoon-process-intro">
       <p class="ideas-process-kicker">PROCESS · RED MOON</p>
@@ -1911,6 +1924,22 @@ function renderRedmoonProcess() {
       <p class="redmoon-storyboard-note">全片 26 镜，时长 46.77 秒。滚动查看镜头图、时间、机位、画面内容、光影设计与转场；点击镜头图可放大。</p>
       <div class="ideas-storyboard-scroll redmoon-storyboard-scroll" role="region" aria-label="赤月审判26镜完整分镜表，可横向和纵向滚动" tabindex="0"><table class="ideas-storyboard-table"><thead><tr><th scope="col">镜号</th><th scope="col">分镜画面</th><th scope="col">时间／时长</th><th scope="col">景别・机位・运镜</th><th scope="col">画面内容与位置关系</th><th scope="col">光影设计</th><th scope="col">轴线与转场</th></tr></thead><tbody id="redmoonStoryboardBody"><tr><td colspan="7">正在载入分镜表…</td></tr></tbody></table></div>
       <a class="redmoon-storyboard-download" href="./assets/redmoon-storyboard.xlsx" download>下载完整分镜表（Excel）</a>
+    </section>
+    <section class="ideas-storyboard-section redmoon-draft-section" aria-labelledby="redmoonDraftHeading">
+      <div class="ideas-section-heading"><p>SKETCH → KEYFRAME</p><h2 id="redmoonDraftHeading">从分镜草稿到关键帧制作</h2></div>
+      <p class="redmoon-draft-intro">四组画面对照：左侧是构图与机位的简笔草稿，右侧是据此制作的关键帧。</p>
+      <div class="redmoon-draft-grid">${draftToFrame.map(([name, draft, frame], index) => `
+        <article class="redmoon-draft-pair" aria-label="第${index + 1}组：${name}">
+          <div class="redmoon-draft-pair-heading"><span>${String(index + 1).padStart(2, '0')}</span><h3>${name}</h3></div>
+          <div class="redmoon-draft-pair-images">
+            <figure><a href="./assets/${draft}" target="_blank" rel="noopener" aria-label="放大查看${name}分镜草稿"><img src="./assets/${draft}" alt="${name}的简笔手绘分镜草稿" loading="lazy"></a><figcaption>分镜草稿</figcaption></figure>
+            <figure><a href="./assets/${frame}" target="_blank" rel="noopener" aria-label="放大查看${name}关键帧"><img src="./assets/${frame}" alt="${name}的对应关键帧" loading="lazy"></a><figcaption>对应关键帧</figcaption></figure>
+          </div>
+        </article>`).join('')}</div>
+      <aside class="redmoon-draft-decision" aria-label="主角出场镜头的制作难点">
+        <span>制作难点 · 主角出场</span>
+        <p>最初计划用跟随环绕的连续镜头展示主角出场，但 Seedance 2.0 难以稳定保持镜头轨迹与人物位置的连续性。最终将长镜头拆为多个短镜头，通过现场空间、主角背影、侦察视角与面部近景逐步揭示身份，再用景别变化和剪辑节奏衔接，让出场更清晰、有力量。</p>
+      </aside>
     </section>
     <section class="ideas-storyboard-section" aria-label="赤月审判关键帧展示">
       <div class="ideas-section-heading"><p>KEYFRAMES</p><h2>关键帧展示</h2></div>

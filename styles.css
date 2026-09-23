@@ -2111,11 +2111,11 @@ button {
   animation: projectLabelBreath 1.4s ease-in-out infinite alternate;
 }
 
-.project-label--redmoon { transform-origin: 93% 48%; }
-.project-label--night { transform-origin: 29% 52%; }
-.project-label--kurong { transform-origin: 50% 52%; }
-.project-label--memory { transform-origin: 72% 52%; }
-.project-label--yueshi { transform-origin: 7% 48%; }
+.project-label--redmoon { transform-origin: 29% 52%; }
+.project-label--night { transform-origin: 72% 52%; }
+.project-label--kurong { transform-origin: 7% 48%; }
+.project-label--memory { transform-origin: 93% 48%; }
+.project-label--yueshi { transform-origin: 50% 52%; }
 
 .cave-hotspot {
   position: absolute;
@@ -2794,6 +2794,22 @@ button {
 .kurong-music-card h3 { margin: .35rem 0 .55rem; color: #245860; font-size: clamp(1.05rem, 1.4vw, 1.45rem); }
 .kurong-music-card p { margin: 0; font-size: clamp(.78rem, .92vw, .97rem); line-height: 1.75; }
 .kurong-evidence-link { display: inline-block; margin-top: .7rem; color: #236f7c; font-weight: 700; font-size: .84rem; text-underline-offset: .2em; }
+.kurong-comparison-grid, .kurong-judgment-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.75rem, 1.5vw, 1.25rem); }
+.kurong-comparison-pair, .kurong-judgment-card { min-width: 0; padding: clamp(.7rem, 1.15vw, 1rem); border: 1px solid #c7d9d5; border-radius: 13px; background: #fff; box-shadow: 0 7px 22px rgba(30, 66, 58, .07); }
+.kurong-comparison-pair h3 { display: flex; align-items: baseline; gap: .65rem; margin: .1rem .2rem .7rem; color: #245860; font-size: clamp(.98rem, 1.25vw, 1.25rem); }
+.kurong-comparison-pair h3 span { color: #ad7259; font: 700 .78rem/1.4 Arial, sans-serif; letter-spacing: .08em; }
+.kurong-comparison-images, .kurong-judgment-images { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+.kurong-comparison-images figure, .kurong-judgment-images figure { min-width: 0; margin: 0; overflow: hidden; border: 1px solid #d4e0dc; border-radius: 9px; background: #f4f8f6; }
+.kurong-comparison-images a, .kurong-judgment-images a { display: block; aspect-ratio: 16 / 9; overflow: hidden; background: #e5edeb; }
+.kurong-comparison-images img, .kurong-judgment-images img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.kurong-comparison-images figcaption, .kurong-judgment-images figcaption { padding: .52rem .65rem; color: #365c60; font-size: clamp(.76rem, .9vw, .9rem); font-weight: 700; line-height: 1.4; }
+.kurong-judgment-section { margin-top: clamp(1rem, 2vw, 2rem); }
+.kurong-judgment-card { display: grid; align-content: start; gap: .8rem; border-color: #bdd2ce; background: #f8fbf9; }
+.kurong-judgment-card .is-chosen { border-color: #2b7778; box-shadow: inset 0 0 0 1px #2b7778; }
+.kurong-judgment-card .is-chosen figcaption { color: #176a6a; }
+.kurong-judgment-card p { margin: 0 .2rem .2rem; color: #36575a; font-size: clamp(.86rem, 1vw, 1rem); line-height: 1.7; }
+.kurong-judgment-card p strong { color: #17666b; }
+@media (max-width: 900px) { .kurong-comparison-grid, .kurong-judgment-grid { grid-template-columns: 1fr; } }
 .kurong-development-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 1rem; align-items: stretch; }
 .kurong-early-storyboard { position: relative; min-width: 0; min-height: 0; margin: 0; padding: .75rem; overflow: hidden; border: 1px solid #cfdbd8; border-radius: 12px; background: #fff; }
 .kurong-early-storyboard > a { position: absolute; inset: .75rem; display: block; overflow: hidden; }
@@ -2896,6 +2912,21 @@ button {
 .redmoon-shot figcaption { padding: .55rem .25rem .25rem; }
 .redmoon-shot figcaption span { color: #f08c92; font: 700 .84rem/1.4 Arial, sans-serif; letter-spacing: .08em; }
 .redmoon-shot figcaption p { margin: .35rem 0 0; font-size: clamp(.9rem, .95vw, 1rem); line-height: 1.7; }
+.redmoon-draft-intro { margin: .45rem 0 1rem; color: #bacbd1; line-height: 1.7; }
+.redmoon-draft-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.8rem, 1.2vw, 1.3rem); }
+.redmoon-draft-pair { min-width: 0; padding: clamp(.7rem, 1vw, 1rem); border: 1px solid #394b56; border-radius: 12px; background: #17232b; }
+.redmoon-draft-pair-heading { display: flex; align-items: baseline; gap: .65rem; margin-bottom: .65rem; }
+.redmoon-draft-pair-heading span { color: #f0939a; font: 700 .88rem Arial, sans-serif; }
+.redmoon-draft-pair-heading h3 { margin: 0; font-size: clamp(1rem, 1.2vw, 1.2rem); }
+.redmoon-draft-pair-images { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
+.redmoon-draft-pair-images figure { min-width: 0; margin: 0; }
+.redmoon-draft-pair-images a { display: block; overflow: hidden; border-radius: 7px; background: #0c141a; }
+.redmoon-draft-pair-images img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; }
+.redmoon-draft-pair-images figcaption { padding: .4rem .1rem 0; color: #b9cbd2; font-size: .86rem; }
+.redmoon-draft-decision { margin-top: 1rem; padding: clamp(.9rem, 1.4vw, 1.4rem); border: 1px solid #815259; border-left: 4px solid #e88a93; border-radius: 10px; background: #231f27; }
+.redmoon-draft-decision span { color: #f3a8ad; font-weight: 700; }
+.redmoon-draft-decision p { margin: .5rem 0 0; line-height: 1.75; }
+@media (max-width: 760px) { .redmoon-draft-grid { grid-template-columns: 1fr; } }
 .redmoon-storyboard-note { margin: .55rem 0 .85rem; color: #b9cbd2; font-size: .95rem; line-height: 1.7; }
 .redmoon-storyboard-scroll { border-color: #3c505b; background: #15232d; scrollbar-color: #ad626a #12202a; }
 .redmoon-storyboard-scroll .ideas-storyboard-table { color: #e3edf0; }
